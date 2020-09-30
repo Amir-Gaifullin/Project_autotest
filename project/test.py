@@ -1,3 +1,4 @@
+from fractions import Fraction
 import unittest
 from my_sum import sum
 class TestSum(unittest.TestCase):
