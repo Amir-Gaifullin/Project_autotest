@@ -4,4 +4,5 @@ python:
 install:
   - pip install -r requirements.txt
 script:
+  - cd c:Project_autotest/project
   - python test2.py
