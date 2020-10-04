@@ -1,25 +1,19 @@
 import unittest
-import pwd
-from my_sum import sum
-#from hamcrest import contains_string
-#from prego import TestCase, Task
-
-class TestSum(unittest.TestCase):
-#    def test_output(self):
-#        task = Task()
-#        text = input()
-#        cmd = task.command('1 2 3 4 5 6')   #<=='your_input'
-#        task.assert_that(cmd.stdout.content, 
-#                         contains_string(21)) # <=='your_expected_output'
-# class TestSum(unittest.TestCase):
-    def test_list_sum(self):
-        data = [1, 2, 3]
-        result = sum(data)
-        self.assertEqual(result, 6)
-
-    def test_list_sum(self):
-        data = [1, 2, 3, 4, 5, 6]
-        result = sum(data)
-        self.assertEqual(result, 21)
+import subprocess
+import pycodestyle
+class Autotest(unittest.TestCase):
+    def test_input_output(self):
+        input_for_test = b"3"
+        output = subprocess.check_output(["python", "c:/Project_autotest/file_for_test/plus_ten.py"], 
+                                         input = input_for_test, stderr = subprocess.STDOUT)
+        str_output = output.decode('utf-8')
+        str_output = str_output.replace("\r", "")
+        correct_output = "13\n"
+        self.assertEqual(str_output,correct_output)
+    def test_code_for_pep8(self):
+        pep8style = pycodestyle.StyleGuide(quiet = True)
+        result = pep8style.check_files(["c:/Project_autotest/file_for_test/plus_ten.py"])   #['file1.py', 'file2.py']
+        self.assertEqual(result.total_errors, 0,
+                         "Found code style errors (and warnings).")
 if __name__ == '__main__':
     unittest.main()
